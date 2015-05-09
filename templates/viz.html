@@ -1,0 +1,39 @@
+<!doctype html>
+
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Basic Viz</title>
+  <meta name="description" content="Basic viz.">
+  <meta name="author" content="Jared M. Smith">
+
+  <link rel="stylesheet" href="{{ viz_css }}?v=1.0">  
+  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+  <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+
+<body>
+    <h1>Here is a map!</h2>
+    <div id="map"></div>
+    <script>
+
+        var layer = L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png',{
+                  attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
+        });
+
+        var map = L.map('map', {
+            scrollWheelZoom: true,
+            center: [35.97, -83.94],
+            zoom: 6
+        });
+
+        map.addLayer(layer);
+
+    </script>
+</body>

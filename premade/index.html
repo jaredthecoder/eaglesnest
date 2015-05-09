@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+	<title>PubNub x Twitter</title>
+	<meta name="description" content="Twitter Visualizations using PubNub data and D3.js">
+	<meta name="author" content="Tomomi Imura  @girlie_mac">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+	<header>
+		<h1><i class="fa fa-twitter"></i> How is America feeling right now?</h1>
+		<p>This map shows the emotional "state" of each state at any given moment. Positive or negative sentiments are loosely determined based on an analysis of key words used in tweets. The realtime data comes from the <a href="https://twitter.com/pubnub" target="_blank">@PubNub</a> Data Stream Network and PubNub's out-of-the-box access to the live Twitter stream.
+		</p>
+	</header>
+
+	<section id="main">
+
+		<section id="map" class="map"></section>
+
+		<section class="tweet">
+			<blockquote class="h-entry">
+				<a class="button" role="button" title="Follow on Twitter" href="" target="_blank"><img src="images/twitter-button.png"></a>
+				<div class="header">
+					<div class="name"></div>
+					<div class="screenname"></div>
+				</div>
+				
+				<div class="text"></div>
+				<div class="timestamp"></div>
+
+				<div class="actions">
+					<a class="reply" href="" target="_blank"><i class="fa fa-reply"></i></a>
+					<a class="retweet" href="" target="_blank"><i class="fa fa-retweet"></i></a>
+					<a class="favorite" href="" target="_blank"><i class="fa fa-star"></i></a>
+				</div>
+			</blockquote>
+			<div class="emotion"></div>
+		</section>
+
+		<section class="legendbox">
+			<ul>
+				<li><div class="happy"></div>More positive tweets</li>
+				<li><div class="neutral"></div>Equal numbers of positive and negative tweets</li>
+				<li><div class="sad"></div>More negative tweets</li>
+			</ul>
+		</section>
+	</section>
+
+	<input type="button" id="toggle" value="Stop me!">
+
+	<footer>
+		<img class="logo" src="images/pubnub-logo.png">
+		<p>PubNub ❤ Twitter demo using <a href="https://twitter.com/hashtag/d3js" target="_blank">#d3js</a> by <a href="https://twitter.com/girlie_mac" target="_blank">@girlie_mac</a></p>
+	</footer>
+
+	<a href="https://github.com/pubnub/tweet-emotion"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"></a>
+
+	<script src="//cdn.pubnub.com/pubnub.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.4.11/d3.min.js"></script>	
+	<script src="//cdnjs.cloudflare.com/ajax/libs/topojson/1.1.0/topojson.min.js"></script>
+	<script src="//twemoji.maxcdn.com/twemoji.min.js"></script>
+	<script src="js/app.min.js"></script>
+
+	<!-- Tracking -->
+	<script>
+	piAId='29622';
+	piCId='23596';
+	(function(){
+	function async_load(){
+	var s=document.createElement('script');s.type='text/javascript';
+	s.src=('https:'==document.location.protocol?'https://pi':'http://cdn')
+	+'.pardot.com/pd.js';
+	var c=document.getElementsByTagName('script')[0];
+	c.parentNode.insertBefore(s,c);}
+	if(window.attachEvent){window.attachEvent('onload',async_load);}
+	else{window.addEventListener('load',async_load,false);}})();
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	ga('create','UA-16927549-1');
+	ga('send','pageview');
+	</script>
+	
+</body>
+</html>

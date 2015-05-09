@@ -1,0 +1,311 @@
+* {
+	box-sizing: border-box;
+}
+html, input {
+    font-family: "Segoe UI Web Light", "Segoe UI Light", "Segoe UI Web Regular", "Segoe UI", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+}
+html {
+    -ms-text-size-adjust: none;
+}
+body {
+    margin: 1.5em;
+    background: #272727;
+    color: #ecf0f0;
+}
+header {
+	margin: 0 100px 4em 0;
+}
+h1, h2, h3 {
+	margin: 0;
+	text-rendering: optimizeLegibility;
+	font-weight: normal;
+}
+h1 {
+	font-size: 3.375em;
+	text-transform: lowercase;
+}
+h2 {
+	font-size: 1em;
+	text-transform: uppercase;
+}
+a, .fa-twitter {
+	color: #55acee;
+}
+img {
+	border: 0;
+}
+p, footer {
+	margin: 1em 0 .5em;
+	color: silver;
+}
+footer {
+	font-size: .8em;
+	margin-top: 2em;
+	padding: 1em;
+	text-align: right;
+}
+footer .logo {
+	display: inline-block;
+}
+
+/* topology */
+
+.states {
+	stroke: #fff;
+	stroke-width: 1px;
+	stroke-linejoin: round;
+
+	-webkit-transition: fill 1s;
+    transition: fill 1s;
+}
+
+/* Tweet */
+
+#main {
+	position: relative;
+	width: 1100px;
+	margin: 0 auto;
+}
+.map {
+	margin-left: -80px;
+}
+.tweet {
+	position: absolute;
+	width: 290px;
+	min-height: 240px;
+	padding: 16px;
+	background: #fff;
+	border-radius: 10px;
+	top: 30px;
+	right: 0px;
+	color: #111;
+	opacity: 0;
+}
+.tweet::after {
+  	content: "";
+  	position: absolute;
+  	bottom: -26px;
+  	left: 130px;
+  	border: 0;
+  	border-left-width: 35px;
+  	border-bottom-width: 26px;
+  	border-style: solid;
+  	border-color: transparent #fff;
+  	display: block;
+  	width: 0;
+}
+.tweet blockquote {
+	margin: 0;
+	border: 0;
+}
+.tweet .button {
+	position: absolute;
+	top: 14px;
+	right: 14px;
+}
+.tweet .header {
+	min-height: 48px;
+	width: calc(100% - 55px);
+	padding: 3px 0 4px 57px;
+	background: url(../images/avatar.png) left top no-repeat;
+}
+.tweet .name {
+	font-weight: bold;
+	font-size: 1rem;
+}
+.tweet .screenname {
+	font-size: 0.875rem;
+}
+.tweet .text {
+	margin-top: 10px;
+	clear: both;
+}
+.tweet .timestamp {
+	font-size: 0.75em;
+	line-height: 1.2em;
+	color: #444;
+	margin-top: 1em;
+}
+.tweet .actions {
+	margin-top: 0.5em;
+	padding-top: 0.5em;
+	text-align: right;
+}
+.tweet .actions a {
+	color: #999;
+}
+.tweet .fa {
+	padding-left: .4em;
+}
+.tweet .fa:hover {
+	color: #5ea9dd;
+}
+.emotion {
+  	position: absolute;
+  	bottom: -60px;
+  	left: 50px;
+  	border: 0;
+  	width: 72px;
+  	height: 72px;
+  	background: url() center center no-repeat;
+}
+
+/* Legend */
+
+ul {
+	padding: 0;
+}
+.legendbox li {
+	list-style-type: none;
+	display: inline-block;
+	vertical-align: middle;
+	font-size: 0.9em;
+	margin-right: 1.5em;
+}
+.legendbox li div {
+	width: 14px;
+	height: 14px;
+	display: inline-block;
+	margin-right: 5px;
+	border-radius: 50%;
+	background-color: #FF8586;
+}
+.legendbox li div.sad {
+	background-color: #63A69F;
+}
+.legendbox li div.neutral {
+	background-color: #DECEB3;
+}
+
+/* Other UI Components */
+
+input[type=button] {
+	margin-top: 1em;
+	background: #5b5858;
+	border: 0 none;
+  	border-radius: 3px;
+  	color: #fff;
+  	cursor: pointer;
+  	font-size: 1em;
+  	line-height: 1.4em;
+  	padding: 0.3em 1.4em;
+}
+.control {
+	width: 200px;
+  	position: absolute;
+  	right: 20px;
+  	top: 400px;
+}
+.emoji {
+	width: 18px;
+	height: 18px;
+	top: 3px;
+	position: relative;
+	margin: 0 1px;
+}
+
+/* Font Awesome */
+
+@font-face {
+  font-family: 'FontAwesome';
+  src: url('../fonts/fontawesome-webfont.eot?v=4.2.0');
+  src: url('../fonts/fontawesome-webfont.eot?#iefix&v=4.2.0') format('embedded-opentype'), url('../fonts/fontawesome-webfont.woff?v=4.2.0') format('woff'), url('../fonts/fontawesome-webfont.ttf?v=4.2.0') format('truetype'), url('../fonts/fontawesome-webfont.svg?v=4.2.0#fontawesomeregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+.fa {
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.fa-twitter:before {
+  content: "\f099";
+}
+.fa-retweet:before {
+  content: "\f079";
+}
+.fa-reply:before {
+  content: "\f112";
+}
+.fa-star:before {
+  content: "\f005";
+}
+
+/* Media-queries */
+
+svg {
+	-webkit-transform-origin: left top;
+	transform-origin: left top;
+}
+@media only screen and (max-width: 1140px) {
+	h1 {
+		font-size: 3em;
+	}
+	#main {
+		width: 880px;
+	}
+	svg {
+		-webkit-transform: scale(0.8);
+		transform: scale(0.8);
+	}
+	.tweet {
+		width: 250px;
+	}
+}	
+@media only screen and (max-width: 900px) {
+	h1 {
+		font-size: 2.4em;
+	}
+	#main {
+		width: 800px;
+	}
+	svg {
+		-webkit-transform: scale(0.7);
+		transform: scale(0.7);
+	}
+	.tweet {
+		width: 230px;
+	}
+}	
+@media only screen and (max-width: 800px) {
+	h1 {
+		font-size: 2em;
+	}
+	#main {
+		width: 100%;
+	}
+	svg {
+		-webkit-transform: scale(0.75);
+		transform: scale(0.75);
+	}
+	.map {
+		margin-left: -40px;
+	}
+	.tweet {
+		position: relative;
+		width: 100%;
+		background: none;
+		border-radius: 0;
+		top: 0;
+		right: 0;
+		color: #fff;
+	}
+	.tweet .timestamp {
+		color: silver;
+	}
+	.tweet::after, .emotion {
+	  	display: none !important;
+	}
+}
+@media only screen and (max-width: 600px) {
+	svg {
+		-webkit-transform: scale(0.5);
+		transform: scale(0.5);
+	}
+	header {
+		margin: 0 0 4em 0;
+	}
+}
