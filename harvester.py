@@ -47,10 +47,10 @@ class CustomStreamListener(tweepy.StreamListener):
     def on_status(self, status):
 
         # Get the sentiment score and assign the correct color to it.
-        # Default to grey for neutral, and we don't have to check
+        # Default to gray for neutral, and we don't have to check
         # if it returns neutral.
         def get_sentiment():
-            color = 'grey'
+            color = 'gray'
             sentiment = self.analyzer.trivially_analyze(status.text)
             if sentiment == 'pos':
                 color = 'green'

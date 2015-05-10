@@ -4,8 +4,7 @@ import argparse
 # Setup the command line parser
 def setup_argparser():
 
-    parser = argparse.ArgumentParser(description='' +
-                                     'Viz' +
+    parser = argparse.ArgumentParser(description='Viz',
                                      version='0.0.0',
                                      formatter_class=RawTextHelpFormatter)
 

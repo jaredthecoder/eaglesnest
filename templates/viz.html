@@ -62,7 +62,6 @@
         pingLayer.radiusScale().range([2, 18]);
         pingLayer.opacityScale().range([1, 0]);
 
-
         // Establish a web socket connection through the STOMP protocol so that we can get data
         // from the Flask server.
         var ws = new SockJS('http://' + window.location.hostname + ':15674/stomp');
@@ -80,7 +79,7 @@
         // Called when a message is recieved from the queue.
         var recv_message = function(message) {
             var jsonData = JSON.parse(message.body);
-            pingLayer.ping([jsonData.lon, jsonData.lat]);       
+            pingLayer.ping([jsonData.lon, jsonData.lat], jsonData.color);
         };
         
         // Called when a connection is made to the web socket.

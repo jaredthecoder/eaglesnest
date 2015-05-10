@@ -1,3 +1,4 @@
+/* General */
 body {
     padding: 0;
     margin: 0;
@@ -8,8 +9,32 @@ html, body, #map {
     width: 100%;
 }
 
+
+
+
+/* Ping classes */
+
 circle.ping {
+    stroke: #222;
+    fill: yellow;
+}
+
+circle.green {
     stroke: #000;
     stroke-width: 1px;
-    fill: aqua;
+    fill: green;
 }
+
+circle.red {
+    stroke: #000;
+    stroke-width: 1px;
+    fill: red;
+}
+
+circle.gray {
+    stroke: #000;
+    stroke-width: 1px;
+    fill: grey;
+}
+
+

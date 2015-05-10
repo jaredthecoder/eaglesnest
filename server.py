@@ -20,7 +20,7 @@ from utils import *
 app = Flask(__name__)
 
 @app.route('/')
-def viz()
+def viz():
     viz_css_url = url_for('static', filename='viz.css')
     leaflet_css_url = url_for('static', filename='leaflet.css')
     d3_js_url = url_for('static', filename='d3.min.js')
