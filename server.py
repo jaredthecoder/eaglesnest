@@ -6,14 +6,21 @@
 #
 ###################################################################################
 
+# Python Standard Libary assets
+import argparse
 import subprocess
+
+# 3rd Party Assets
 from flask import Flask
 from flask import render_template, url_for
+
+# Project specific assets
+from utils import *
 
 app = Flask(__name__)
 
 @app.route('/')
-def viz():
+def viz()
     viz_css_url = url_for('static', filename='viz.css')
     leaflet_css_url = url_for('static', filename='leaflet.css')
     d3_js_url = url_for('static', filename='d3.min.js')
@@ -29,6 +36,9 @@ def viz():
 
 
 if __name__ == '__main__':
+
+    #parser = setup_argparser()
+    #args = parser.parse_args()
 
     subprocess.Popen(['/usr/bin/python2.7', 'run_harvester.py'])
 

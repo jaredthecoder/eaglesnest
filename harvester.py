@@ -58,13 +58,17 @@ class CustomStreamListener(tweepy.StreamListener):
                 color = 'red'
             return color
 
+
         data = {}
         if status.coordinates is not None and status.coordinates['type'] == 'Point':
             color = get_sentiment()
+            print "[ %s ] -- %s" % (color, status.text)
 
             data['lon'] = status.coordinates['coordinates'][0]
             data['lat'] = status.coordinates['coordinates'][1]
             data['color'] = color
+
+            print data
         else:
             pass
 
@@ -101,11 +105,11 @@ class Harvester(object):
     def stream(self):
         print 'Starting the stream...'
 
-        if self.filter_type is 'location':
+        if self.filter_type == 'location':
             # TODO: Let this be customizable, i.e. take a bounding box from the web interface
             # Filter by location using a bounding box on the contiguous united states.
-            self.streaming_api.filter(locations=location)
-        elif self.filter_type is 'keyword':
+            self.streaming_api.filter(locations=self.location)
+        elif self.filter_type == 'keyword':
             # Filter by keywords
             self.streaming_api.filter(keywords=keywords)
 
