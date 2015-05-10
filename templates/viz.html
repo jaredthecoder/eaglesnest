@@ -18,9 +18,7 @@
 </head>
 
 <body>
-    <h1>Here is a map!</h2>
     <div id="map"></div>
-    <!--<button onclick="togglePlay()">Pause</button>-->
 
     <script src="{{ leaflet_js }}"></script>
     <script src="{{ d3_js  }}" charset="utf-8"></script>
@@ -74,47 +72,23 @@
         client.heartbeat.incoming = 0;
         client.heartbeat.outgoing = 0;
 
+        // Called on error.
         var on_error = function(error) {
             console.log('error');
         };
 
+        // Called when a message is recieved from the queue.
         var recv_message = function(message) {
             var jsonData = JSON.parse(message.body);
             pingLayer.ping([jsonData.lon, jsonData.lat]);       
         };
         
-
+        // Called when a connection is made to the web socket.
         var on_connect = function() {
             var subscription = client.subscribe("/amq/queue/twitter_sentiment_feed", recv_message); 
         };
 
+        // Establish a connection with the broker.
         client.connect('guest', 'guest',  on_connect, on_error, '/');
-
-        // Set random lat/lon pairs for coordinates.
-        // var latFn = d3.random.normal(center[0], 1);
-        // var longFn = d3.random.normal(center[1], 1);
-
-        // Update function pings the map with random coordinates generated from above.
-        /*var paused = false;
-        var update = function() {
-            if (!paused) {
-                pingLayer.ping([longFn(), latFn()]);
-                window.setTimeout(update, 100 + Math.random() * 400);
-            }
-        };
-        
-        // Let the pinging begin!
-        window.setTimeout(update);
-
-        // Toggles the pinging on or off.
-        function togglePlay() {
-            paused = !paused;
-            d3.select('button').text((paused) ? 'Play' : 'Pause');
-
-            if(!paused) {
-                window.setTimeout(update);
-            }
-        }*/
-
     </script>
 </body>
