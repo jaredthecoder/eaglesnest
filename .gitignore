@@ -1,3 +1,5 @@
 premade/
 bower_components/
+credentials.py
+*.pyc
 
