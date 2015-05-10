@@ -10,8 +10,10 @@
   <meta name="author" content="Jared M. Smith">
 
   <link rel="stylesheet" href="{{ viz_css }}?v=1.0">  
-  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
-  <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+  <link rel="stylesheet" href="{{ leaflet_css }}" />
+  <script src="{{ leaflet_js }}"></script>
+  <script src="{{ d3_js  }}" charset="utf-8"></script>
+  <script src="{{ leaflet_d3 }}" charset="utf-8"></script>
 
   <!--[if lt IE 9]>
   <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -23,17 +25,67 @@
     <div id="map"></div>
     <script>
 
-        var layer = L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png',{
-                  attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
+        // Define the center of the map.
+        var center = [35.97, -83.94];
+
+        // Get the basemap 'Dark Matter' from CartoDB and create the basemap layer.
+        var basemapLayer = L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png',{
+                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
         });
 
+        // Create the map object.
         var map = L.map('map', {
+            layers: [basemapLayer],
             scrollWheelZoom: true,
-            center: [35.97, -83.94],
+            center: new L.LatLng(center[0], center[1]),
             zoom: 6
         });
 
-        map.addLayer(layer);
+        // Configure a ping layer.
+        var options = {
+            lng: function(d){ return d[0]; },
+            lat: function(d){ return d[1]; },
+            duration: 800,
+            efficient: {
+                enabled: false,
+                fps: 8
+            }
+        };
+
+        // Create the ping layer and add it to the map.
+        var pingLayer = L.pingLayer(options).addTo(map);
+
+        // Change the radius and the opacity of the ping marker.
+        pingLayer.radiusScale().range([2, 18]);
+        pingLayer.opacityScale().range([1, 0]);
+
+        // Set random lat/lon pairs for coordinates.
+        var latFn = d3.random.normal(center[0], 1);
+        var longFn = d3.random.normal(center[1], 1);
+
+        // Update function pings the map with random coordinates generated from above.
+        var paused = false;
+        var update = function() {
+            if (!paused) {
+                pingLayer.ping([longFn(), latFn()]);
+                window.setTimeout(update, 100 + Math.random() * 400);
+            }
+        };
+        
+        // Let the pinging begin!
+        window.setTimeout(update);
+
+        // Toggles the pinging on or off.
+        function togglePlay() {
+            paused = !paused;
+            d3.select('button').text((paused) ? 'Play' : 'Pause');
+
+            if(!paused) {
+                window.setTimeout(update);
+            }
+        }
 
     </script>
+    <button onclick="togglePlay()">Pause</button>
+
 </body>
