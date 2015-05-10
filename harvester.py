@@ -36,12 +36,12 @@ class CustomStreamListener(tweepy.StreamListener):
         # Set max queue size
         args = {"x-max-length": 2000}
 
-        self.channel.queue_declare(queue='twitter_topic_feed', arguments=args)
+        self.channel.queue_declare(queue='twitter_sentiment_feed', arguments=args)
 
     # When a status is recieved, this will execute
     def on_status(self, status):
 
-        print status.text, "\n"
+        #print status.text + "\n"
 
         data = {}
         if status.coordinates is not None:
@@ -78,7 +78,7 @@ class Harvester(object):
         self.streaming_api = tweepy.streaming.Stream(self.auth, self.stream_listener)
 
     def stream(self):
-        print 'Starting the stream...'
+        #print 'Starting the stream...'
 
         # TODO: Let this be customizable, i.e. take a bounding box from the web interface
         # Filter by location using a bounding box on the contiguous united states.

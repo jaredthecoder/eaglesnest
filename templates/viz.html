@@ -11,11 +11,6 @@
 
   <link rel="stylesheet" href="{{ viz_css }}?v=1.0">  
   <link rel="stylesheet" href="{{ leaflet_css }}" />
-  <script src="{{ leaflet_js }}"></script>
-  <script src="{{ d3_js  }}" charset="utf-8"></script>
-  <script src="{{ leaflet_d3 }}" charset="utf-8"></script>
-  <script src="{{ sock_js }} charset="utf-8"></script>
-  <script src="{{ stomp_js }}" charset="utf-8"></script>
 
   <!--[if lt IE 9]>
   <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -25,6 +20,14 @@
 <body>
     <h1>Here is a map!</h2>
     <div id="map"></div>
+    <!--<button onclick="togglePlay()">Pause</button>-->
+
+    <script src="{{ leaflet_js }}"></script>
+    <script src="{{ d3_js  }}" charset="utf-8"></script>
+    <script src="{{ leaflet_d3 }}" charset="utf-8"></script>
+    <script src="{{ sock_js }}" charset="utf-8"></script>
+    <script src="{{ stomp_js }}" charset="utf-8"></script>
+
     <script>
 
         // Define the center of the map.
@@ -61,12 +64,38 @@
         pingLayer.radiusScale().range([2, 18]);
         pingLayer.opacityScale().range([1, 0]);
 
+
+        // Establish a web socket connection through the STOMP protocol so that we can get data
+        // from the Flask server.
+        var ws = new SockJS('http://' + window.location.hostname + ':15674/stomp');
+        var client = Stomp.over(ws);
+        
+        // Disable heartbeat functionality as it is not supported by this STOMP setup.
+        client.heartbeat.incoming = 0;
+        client.heartbeat.outgoing = 0;
+
+        var on_error = function(error) {
+            console.log('error');
+        };
+
+        var recv_message = function(message) {
+            var jsonData = JSON.parse(message.body);
+            pingLayer.ping([jsonData.lon, jsonData.lat]);       
+        };
+        
+
+        var on_connect = function() {
+            var subscription = client.subscribe("/amq/queue/twitter_sentiment_feed", recv_message); 
+        };
+
+        client.connect('guest', 'guest',  on_connect, on_error, '/');
+
         // Set random lat/lon pairs for coordinates.
-        var latFn = d3.random.normal(center[0], 1);
-        var longFn = d3.random.normal(center[1], 1);
+        // var latFn = d3.random.normal(center[0], 1);
+        // var longFn = d3.random.normal(center[1], 1);
 
         // Update function pings the map with random coordinates generated from above.
-        var paused = false;
+        /*var paused = false;
         var update = function() {
             if (!paused) {
                 pingLayer.ping([longFn(), latFn()]);
@@ -85,9 +114,7 @@
             if(!paused) {
                 window.setTimeout(update);
             }
-        }
+        }*/
 
     </script>
-    <button onclick="togglePlay()">Pause</button>
-
 </body>

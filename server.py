@@ -6,8 +6,10 @@
 #
 ###################################################################################
 
+import subprocess
 from flask import Flask
 from flask import render_template, url_for
+
 app = Flask(__name__)
 
 @app.route('/')
@@ -26,6 +28,9 @@ def viz():
                            stomp_js=stomp_js_url, sock_js=sock_js_url)
 
 
-if __name__ == '__main__'
-    app.debug = True
+if __name__ == '__main__':
+
+    subprocess.Popen(['/usr/bin/python2.7', 'run_harvester.py'])
+
+    app.debug = False
     app.run()
