@@ -1,93 +1,91 @@
-<!doctype html>
-
-
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8">
+     <meta charset="utf-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1">
+     <meta name="description" content="Sentiment Vizualizer using Python, Flask, Leaflet.js, D3.js, and Python NLTK.">
+     <meta name="author" content="Jared M. Smith">
 
-  <title>Basic Viz</title>
-  <meta name="description" content="Basic viz.">
-  <meta name="author" content="Jared M. Smith">
+     <title>Sentiment Vizualizer</title>
 
-  <link rel="stylesheet" href="{{ viz_css }}?v=1.0">  
-  <link rel="stylesheet" href="{{ leaflet_css }}" />
+     <!-- FontAwesome icons -->
+     </i><link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
-  <!--[if lt IE 9]>
-  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-  <![endif]-->
+     <!-- Leaflet CSS Styles -->
+     <link rel="stylesheet" href="{{ leaflet_css }}">
+
+     <!-- Bootstrap CSS Styles -->
+     <link rel="stylesheet" href="{{ bootstrap_css }}?v=1.0">  
+
+     <!-- Custom CSS Styles -->
+     <link rel="stylesheet" href="{{ viz_css }}?v=1.0">
+
+     <!-- Fix for older browsers (IE) -->
+     <!--[if lt IE 9]>
+         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+     <![endif]-->
+
 </head>
 
 <body>
-    <div id="map"></div>
+    
+    <!-- Navbar -->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Sentiment Vizualizer</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" onclick="$('#aboutModal').modal('show'); return false;"><i class="icon-question-sign" style="color: white"></i>&nbsp;&nbsp;About</a></li>
+                <li><a href="mailto:smith@utk.edu?subject=Hello I saw BirdsEye!"><i class="icon-envelope" style="color: white"></i>&nbsp;&nbsp;Contact</a></li>
+                <li><a href="https://github.com/jaredmichaelsmith/sentimentvizualizer"><i class="icon-github-alt" style="color: white"></i>&nbsp;&nbsp;GitHub</a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- End Navbar -->
 
-    <script src="{{ leaflet_js }}"></script>
+    <!-- Sidebar and Map Row -->
+    <div class="row" id="container">
+        <div class="col-sm-3 col-lg-3" id="sidebar">
+            <a class="twitter-timeline" data-dnt="true" href="https://twitter.com/jaredthecoder" data-widget-id="476401600479506433">Tweets by @jaredthecoder</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>  
+        </div>
+        <!-- Leaflet map embed -->
+        <div class="col-sm-9 col-lg-9" id="map"></div>
+    </div>
+    <!-- End Sidebar and Map Row -->
+
+    <!-- Sidebar Toggle -->
+    <a href="#" type="button" rel="tooltip" class="toggle btn btn-default" data-toggle="tooltip" data-placement="right" title="Toggle sidebar"><i class="icon-chevron-left"></i></a>
+
+    <!-- About modal pop-up -->
+    <div class="modal fade" id="aboutModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h3 class="modal-title">Sentiment Vizualizer by Jared Smith</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End About modal pop-up -->
+
+    <script src="{{ leaflet_js }}" charset="utf-8"></script>
     <script src="{{ d3_js  }}" charset="utf-8"></script>
-    <script src="{{ leaflet_d3 }}" charset="utf-8"></script>
+    <script src="{{ leaflet_d3_js }}" charset="utf-8"></script>
     <script src="{{ sock_js }}" charset="utf-8"></script>
     <script src="{{ stomp_js }}" charset="utf-8"></script>
-
-    <script>
-
-        // Define the center of the map.
-        var center = [35.97, -83.94];
-
-        // Get the basemap 'Dark Matter' from CartoDB and create the basemap layer.
-        var basemapLayer = L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png',{
-                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
-        });
-
-        // Create the map object.
-        var map = L.map('map', {
-            layers: [basemapLayer],
-            scrollWheelZoom: true,
-            center: new L.LatLng(center[0], center[1]),
-            zoom: 6
-        });
-
-        // Configure a ping layer.
-        var options = {
-            lng: function(d){ return d[0]; },
-            lat: function(d){ return d[1]; },
-            duration: 800,
-            efficient: {
-                enabled: false,
-                fps: 8
-            }
-        };
-
-        // Create the ping layer and add it to the map.
-        var pingLayer = L.pingLayer(options).addTo(map);
-
-        // Change the radius and the opacity of the ping marker.
-        pingLayer.radiusScale().range([2, 18]);
-        pingLayer.opacityScale().range([1, 0]);
-
-        // Establish a web socket connection through the STOMP protocol so that we can get data
-        // from the Flask server.
-        var ws = new SockJS('http://' + window.location.hostname + ':15674/stomp');
-        var client = Stomp.over(ws);
-        
-        // Disable heartbeat functionality as it is not supported by this STOMP setup.
-        client.heartbeat.incoming = 0;
-        client.heartbeat.outgoing = 0;
-
-        // Called on error.
-        var on_error = function(error) {
-            console.log('error');
-        };
-
-        // Called when a message is recieved from the queue.
-        var recv_message = function(message) {
-            var jsonData = JSON.parse(message.body);
-            pingLayer.ping([jsonData.lon, jsonData.lat], jsonData.color);
-        };
-        
-        // Called when a connection is made to the web socket.
-        var on_connect = function() {
-            var subscription = client.subscribe("/amq/queue/twitter_sentiment_feed", recv_message); 
-        };
-
-        // Establish a connection with the broker.
-        client.connect('guest', 'guest',  on_connect, on_error, '/');
-    </script>
+    <script src="{{ jquery_js }}" charset="utf-8"></script>
+    <script src="{{ bootstrap_js }}" charset="utf-8"></script>
+    <script src="{{ viz_js }}" charset="utf-8"></script>
 </body>
+
+</html>

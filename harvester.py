@@ -69,13 +69,11 @@ class CustomStreamListener(tweepy.StreamListener):
             data['color'] = color
 
             print data
-        else:
-            pass
 
-        # Push the tweet onto the AMPQ RabbitMQ channel
-        self.channel.basic_publish(exchange='',
-                                    routing_key='twitter_sentiment_feed',
-                                    body=json.dumps(data))
+            # Push the tweet onto the AMPQ RabbitMQ channel
+            self.channel.basic_publish(exchange='',
+                                        routing_key='twitter_sentiment_feed',
+                                        body=json.dumps(data))
 
     # Execute on error
     def on_error(self, status_code):

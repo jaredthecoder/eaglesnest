@@ -1,0 +1,123 @@
+@import url(http://fonts.googleapis.com/css?family=Raleway:400,500,600,700,300,200);
+
+html, body, #map, #sidebar, #container {
+    height: 100%;
+    margin: 0px;
+}
+
+* {
+    font-family: 'Raleway', sans-serif;
+}
+
+body {
+    padding-top: 50px;
+}
+
+label {
+    font-weight: normal;
+}
+
+.panel-heading a:hover {
+    text-decoration: none;
+}
+
+.navbar .navbar-brand {
+    font-weight: bold;
+    font-size: 22px;
+    color: white;
+    white-space: nowrap;
+}
+
+.leaflet-popup-content {
+    margin-top: 14px;
+    margin-bottom: 0px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+a.toggle {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    display: block;
+    -webkit-border-radius: 0 !important;
+    -moz-border-radius: 0 !important;
+    border-radius: 0 !important;
+    -webkit-border-top-right-radius: 4px !important;
+    -moz-border-top-right-radius: 4px !important;
+    border-top-right-radius: 4px !important;
+    -webkit-border-bottom-right-radius: 4px !important;
+    -moz-border-bottom-right-radius: 4px !important;
+    border-bottom-right-radius: 4px !important;
+    background-color: #0E0E0E;
+    color: white;
+    opacity: 0.8;
+    z-index: 100;
+}
+
+a:hover.toggle {
+    background-color: #000;
+    color: white;
+    opacity: 1;
+}
+
+#sidebar {
+    padding: 10px;
+    overflow: auto;
+    background: #0E0E0E;
+}
+
+/* D3.js Ping element styles */
+
+circle.ping {
+     stroke: #222;
+     fill: yellow;
+}
+
+circle.green {
+    stroke: #000;
+    stroke-width: 1px;
+    fill: green;
+}
+
+circle.red {
+    stroke: #000;
+    stroke-width: 1px;
+    fill: red;
+}
+
+circle.gray {
+    stroke: #000;
+    stroke-width: 1px;
+    fill: grey;
+}
+
+/* Media Queries */
+
+@media (max-width: 992px) {
+    .navbar .navbar-brand {
+        font-size: 18px;
+        float: left;
+    }
+    .search-container {
+        width: 150px;
+    }
+    .leaflet-control-attribution {
+        display: none;
+    }
+}
+
+@media (max-width: 768px){
+    .search-container {
+        width: 100%;
+    }
+}
+
+/* Print Handling */
+@media print {
+    .navbar, .toggle, #sidebar {
+        display: none !important;
+    }
+}
+
+
