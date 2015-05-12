@@ -26,7 +26,7 @@ def viz():
 
 if __name__ == '__main__':
 
-    subprocess.Popen(['/usr/bin/python2.7', 'run_harvester.py'])
+    subprocess.Popen(['/usr/bin/python2.7', 'backend/run_harvester.py'])
 
     app.debug = True
     app.run()
