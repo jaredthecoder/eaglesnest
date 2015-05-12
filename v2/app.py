@@ -14,9 +14,6 @@ import subprocess
 from flask import Flask
 from flask import render_template
 
-# Project specific assets
-from utils import *
-
 app = Flask(__name__)
 
 @app.route('/')
