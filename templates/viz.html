@@ -14,16 +14,16 @@
      </i><link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
      <!-- Leaflet CSS Styles -->
-     <link rel="stylesheet" href="static/css/vendor/leaflet.css">
+     <link rel="stylesheet" href="{{ leaflet_css }}">
 
      <!-- Bootstrap CSS Styles -->
-     <link rel="stylesheet" href="static/css/vendor/bootstrap.min.css?v=1.0">  
+     <link rel="stylesheet" href="{{ bootstrap_css }}?v=1.0">  
     
      <!-- Slick jQuery Slider by Ken Wheeler -->
      <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.5.0/slick.css"/>
      
      <!-- Custom CSS Styles -->
-     <link rel="stylesheet" href="static/css/viz.css?v=1.0">
+     <link rel="stylesheet" href="{{ viz_css }}?v=1.0">
 
      <!-- Fix for older browsers (IE) -->
      <!--[if lt IE 9]>
@@ -58,13 +58,15 @@
     </div>
     <!-- End Navbar -->
 
-    <!-- Sidebar and Map Row -->
-    <div class="row" id="container">
-        <div class="col-sm-3 col-lg-3 hud-panel" id="sidebar">
+    <!-- Sidebar and Map Container -->
+    <div id="container" class="row">
+        <div id="sidebar" class="col-sm-3 col-lg-3" style="padding: 10px; overflow: auto">
             <!-- Repeats for every Tweet in the $scope.tweets model -->
-            <div ng-repeat="tweet in tweets" class="tweet-item {{tweet.sentiment.state}}">
+            {% raw %}
+            <div ng-repeat="tweet in tweets" class="tweet-item {{tweet.sentiment}}">
                 <img ng-src="{{tweet.user_profile_image_url}}" />
-                <span class="text"><a href="{{tweet.user_profile_image_url}}" target="_blank">@{{tweet.user_screen_name}}</a></span>
+                <span class="text"><a href="{{tweet.user_profile_image_url}}" target="_blank">{{ tweet.user_screen_name}}</a></span>
+            {% endraw %}
             </div>
         </div>
         <!-- Leaflet map embed -->
@@ -88,14 +90,16 @@
     </div>
     <!-- End About modal pop-up -->
 
+    </div>
+
     <!-- 3rd Party JavaScript files -->
-    <script src="static/js/vendor/leaflet.js" charset="utf-8"></script>
-    <script src="static/js/vendor/d3.min.js" charset="utf-8"></script>
-    <script src="static/js/vendor/leaflet-d3.min.js" charset="utf-8"></script>
-    <script src="static/js/vendor/sockjs-0.3.js" charset="utf-8"></script>
-    <script src="static/js/vendor/stomp.min.js" charset="utf-8"></script>
-    <script src="static/js/vendor/jquery.min.js" charset="utf-8"></script>
-    <script src="static/js/vendor/bootstrap.min.js" charset="utf-8"></script>
+    <script src="{{ leaflet_js }}" charset="utf-8"></script>
+    <script src="{{ d3_js  }}" charset="utf-8"></script>
+    <script src="{{ leaflet_d3_js }}" charset="utf-8"></script>
+    <script src="{{ sock_js }}" charset="utf-8"></script>
+    <script src="{{ stomp_js }}" charset="utf-8"></script>
+    <script src="{{ jquery_js }}" charset="utf-8"></script>
+    <script src="{{ bootstrap_js }}" charset="utf-8"></script>
     <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.5.0/slick.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.18/angular.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.18/angular-resource.min.js"></script>

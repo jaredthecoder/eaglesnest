@@ -119,11 +119,11 @@ app.controller('TweetHud', function($scope, $resource, $timeout, $rootScope) {
     function addTweet (tweet) {
 
         if (tweet.color === 'red') {
-            tweet.sentiment.state = 'negative';
+            tweet.sentiment = 'negative';
         } else if (tweet.color === 'green') {
-            tweet.sentiment.state = 'positive';
+            tweet.sentiment = 'positive';
         } else if (tweet.color === 'gray') {
-            tweet.sentiment.state = 'neutral';
+            tweet.sentiment = 'neutral';
         }
 
         $scope.$apply(function () {
