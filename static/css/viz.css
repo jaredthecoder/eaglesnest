@@ -1,16 +1,7 @@
 @import url(http://fonts.googleapis.com/css?family=Raleway:400,500,600,700,300,200);
-
-body {
-    padding: 0;
-    padding-top: 50px;
-    margin: 0;
-}
-
-html, body, #map  {
-}
-
-#map {
-    1000px;
+html, body {
+    height: 100%;
+    margin 0;
 }
 
 label {
@@ -19,6 +10,11 @@ label {
 
 #sidebar {
     background: #0E0E0E;
+    max-height: 100%;
+}
+
+#map {
+    height: 100%;
 }
 
 .navbar .navbar-brand {

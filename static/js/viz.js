@@ -58,15 +58,23 @@ app.controller('TweetHud', function($scope, $resource, $timeout, $rootScope) {
             zoom:5
         });
 
-        var isCollapsed;
-        // Larger screens get scale control and expanded layer control
-        if (document.body.clientWidth <= 767) {
-            isCollapsed = true;
-        } else {
-            isCollapsed = false;
-            map.addControl(scaleControl);
-        }
 
+        var mapmargin = 50;
+        $('#map').css("height", ($(document).height() - mapmargin));
+        $(window).on("resize", resize);
+        resize();
+        function resize(){
+
+            if($(window).width()>=980){
+                $('#map').css("height", ($(window).height() - mapmargin));    
+                $('#map').css("margin-top",50);
+            }else{
+                $('#map').css("height", ($(window).height() - (mapmargin+12)));    
+                $('#map').css("margin-top",-21);
+            }
+
+        }
+         
         // Configure a ping layer.
         var options = {
             lng: function(d){ return d[0]; },
@@ -114,6 +122,8 @@ app.controller('TweetHud', function($scope, $resource, $timeout, $rootScope) {
 
         // Establish a connection with the broker.
         client.connect('guest', 'guest',  on_connect, on_error, '/');
+
+
     };
 
     function addTweet (tweet) {
