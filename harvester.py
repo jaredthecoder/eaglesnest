@@ -67,6 +67,9 @@ class CustomStreamListener(tweepy.StreamListener):
             data['lon'] = status.coordinates['coordinates'][0]
             data['lat'] = status.coordinates['coordinates'][1]
             data['color'] = color
+            data['id_str'] = status.id_str
+            data['user_profile_image_url'] = status.user.profile_image_url
+            data['user_screen_name'] = status.user.screen_name
 
             print data
 

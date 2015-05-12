@@ -61,10 +61,43 @@ a:hover.toggle {
     opacity: 1;
 }
 
+/* Left hand sidebar styles */
+
 #sidebar {
     padding: 10px;
     overflow: auto;
     background: #0E0E0E;
+}
+
+.tweet-item {
+    position: relative;
+    width: 220px;
+    height: 25px;
+    overflow: hidden;
+    background-color: #0E0E0E;
+    margin: 0 0 1px 0;
+    border-left: 5px solid #333;
+}
+
+.tweet-item img {
+    height: 25px;
+    width: 25px;
+    margin: 0 5px 0 1px;
+    opacity: 0.75;
+}
+    
+.tweet-item .text {
+    position: relative;
+    top: -8px;
+    font-size: 12px;
+}
+
+&.negative {
+    border-color: red;
+}
+
+&.positive {
+    border-color: green;
 }
 
 /* D3.js Ping element styles */
