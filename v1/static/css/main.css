@@ -21,7 +21,8 @@ label {
 #sidebar {
     background: #0E0E0E;
     height: 100%;
-    max-width: 100%;
+    width: 40%;
+    max-width: 40%;
     float: left;
      -webkit-transition: all 0.25s ease-out;
        -moz-transition: all 0.25s ease-out;

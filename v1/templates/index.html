@@ -13,8 +13,6 @@
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="static/css/vendor/bootstrap.min.css?v=1.0">  
     <link rel="stylesheet" href="static/css/vendor/leaflet.css">
-    <link rel="stylesheet" href="static/css/vendor/leaflet-control-credits.css">
-    <link rel="stylesheet" href="static/css/vendor/leaflet-sidebar.css">
     <link rel="stylesheet" href="static/css/main.css">
 
     <!-- Fix for older browsers (IE) -->
@@ -41,10 +39,10 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" onclick="$('#aboutModal').modal('show'); return false;"><i class="icon-question-sign" style="color: white"></i>&nbsp;&nbsp;About</a></li>
-                <li><a href="mailto:smith@utk.edu?subject=Hello I saw BirdsEye!"><i class="icon-envelope" style="color: white"></i>&nbsp;&nbsp;Contact</a></li>
-                <li><a href="https://github.com/jaredmichaelsmith/sentimentvizualizer"><i class="icon-github-alt" style="color: white"></i>&nbsp;&nbsp;GitHub</a></li>
-                <li><a href="https://twitter.com/share"><i class="icon-twitter" style="color: white"></i>&nbsp;&nbsp;Share</a></li>
+                <li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" onclick="$('#aboutModal').modal('show'); return false;"><i class="fa fa-cog" style="color: white"></i>&nbsp;&nbsp;About</a></li>
+                <li><a href="mailto:smith@utk.edu?subject=Hello I saw BirdsEye!"><i class="fa fa-envelope" style="color: white"></i>&nbsp;&nbsp;Contact</a></li>
+                <li><a href="https://github.com/jaredmichaelsmith/sentimentvizualizer"><i class="fa fa-github" style="color: white"></i>&nbsp;&nbsp;GitHub</a></li>
+                <li><a href="https://twitter.com/share"><i class="fa fa-twitter" style="color: white"></i>&nbsp;&nbsp;Share</a></li>
             </ul>
         </div>
     </div>
@@ -55,10 +53,12 @@
         <div id="sidebar" class="col-sm-3 col-lg-3" style="padding: 10px; overflow: auto">
             <!-- Repeats for every Tweet in the $scope.tweets model -->
             <div id="tweet-hud" ng-controller="TweetHud">
+                {% raw %}
                 <div ng-repeat="tweet in tweets" class="tweet-item {{tweet.sentiment}}">
                     <img ng-src="{{tweet.user_profile_image_url}}" />
                     <span class="text"><a href="{{tweet.user_profile_image_url}}" target="_blank">{{ tweet.user_screen_name}}</a></span>
                 </div>
+                {% endraw %}
             </div>
         </div>
         <!-- Leaflet map embed -->
@@ -67,7 +67,7 @@
     <!-- End Sidebar and Map Row -->
 
     <!-- Sidebar Toggle -->
-    <a href="#" type="button" rel="tooltip" class="toggle btn btn-default" data-toggle="tooltip" data-placement="right" title="Toggle sidebar"><i class="icon-chevron-left"></i></a>
+    <a href="#" type="button" rel="tooltip" class="toggle btn btn-default" data-toggle="tooltip" data-placement="right" title="Toggle sidebar"><i class="fa fa-chevron"></i></a>
 
     <!-- About modal pop-up -->
     <div class="modal fade" id="aboutModal">
@@ -89,8 +89,6 @@
     <script src="static/js/vendor/boostrap.min.js" charset="utf-8"></script>
     <script src="static/js/vendor/leaflet.js"></script>
     <script src="static/js/vendor/leaflet-d3.min.js"></script>
-    <script src="static/js/vendor/leaflet-sidebar.min.js"></script>
-    <script src="static/js/vendor/leaflet-control-credits.js"></script>
     <script src="static/js/vendor/angular.js"></script>
     <script src="static/js/vendor/angular-resource.js"></script>
     <script src="static/js/vendor/angular-route.js"></script>
