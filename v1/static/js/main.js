@@ -1,5 +1,5 @@
 /*
- *  File: viz.js
+ *  File: main.js
  *  Description: Main javascript code for the webpage.
  *  Author: Jared M. Smith <jaredmichaelsmith.com>
  *

@@ -1,7 +1,17 @@
 @import url(http://fonts.googleapis.com/css?family=Raleway:400,500,600,700,300,200);
-html, body {
+
+* {
+    font-family: 'Raleway', sans-serif;
+}
+
+html, body, #container{
     height: 100%;
+    width: 100%;
     margin 0;
+}
+
+body {
+    padding-top: 50px;   
 }
 
 label {
@@ -10,22 +20,48 @@ label {
 
 #sidebar {
     background: #0E0E0E;
-    max-height: 100%;
+    height: 100%;
+    max-width: 100%;
+    float: left;
+     -webkit-transition: all 0.25s ease-out;
+       -moz-transition: all 0.25s ease-out;
+       transition: all 0.25s ease-out;
 }
 
 #map {
+    width: auto;
     height: 100%;
 }
 
+.sidebar-wrapper {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
 .navbar .navbar-brand {
-    color: white;
-    font-size: 22px;
     font-weight: bold;
-    white-space: nowrap;
+    font-size: 25px;
+    color: #FFFFFF;
 }
-.leaflet-popup-content {
-    margin: 14px 20px 0;
+
+.navbar-collapse.in {
+    overflow-y: hidden;
 }
+
+.navbar-header .navbar-icon-container {
+    margin-right: 15px;
+}
+
+.navbar-header .navbar-icon {
+    line-height: 50px;
+    height: 50px;
+}
+
+.navbar-header a.navbar-icon {
+    margin-left: 25px;
+}
+
 a.toggle {
     background-color: #222;
     border-radius: 0 4px 4px 0 !important;
@@ -37,15 +73,13 @@ a.toggle {
     position: fixed;
     z-index: 100;
 }
+
 a.toggle:hover {
     background-color: #222;
     color: white;
     opacity: 1;
 }
 
-* {
-    font-family: 'Raleway', sans-serif;
-}
 
 .tweet-item {
     height: 25px;

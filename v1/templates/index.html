@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="BirdsEye">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="BirdsEye, a Twitter Sentiment Visualizer. View Twitter like you never have before. From above.">
+    <meta name="author" content="Jared Smith">
+
+    <title>BirdsEye</title>
+
+    <!-- CSS Files -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="static/css/vendor/bootstrap.min.css?v=1.0">  
+    <link rel="stylesheet" href="static/css/vendor/leaflet.css">
+    <link rel="stylesheet" href="static/css/vendor/leaflet-control-credits.css">
+    <link rel="stylesheet" href="static/css/vendor/leaflet-sidebar.css">
+    <link rel="stylesheet" href="static/css/main.css">
+
+    <!-- Fix for older browsers (IE) -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.ie.css">
+    <![endif]-->
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">BirdsEye: Twitter from Above</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" onclick="$('#aboutModal').modal('show'); return false;"><i class="icon-question-sign" style="color: white"></i>&nbsp;&nbsp;About</a></li>
+                <li><a href="mailto:smith@utk.edu?subject=Hello I saw BirdsEye!"><i class="icon-envelope" style="color: white"></i>&nbsp;&nbsp;Contact</a></li>
+                <li><a href="https://github.com/jaredmichaelsmith/sentimentvizualizer"><i class="icon-github-alt" style="color: white"></i>&nbsp;&nbsp;GitHub</a></li>
+                <li><a href="https://twitter.com/share"><i class="icon-twitter" style="color: white"></i>&nbsp;&nbsp;Share</a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- End Navbar -->
+
+    <!-- Sidebar and Map Container -->
+    <div id="container" class="row">
+        <div id="sidebar" class="col-sm-3 col-lg-3" style="padding: 10px; overflow: auto">
+            <!-- Repeats for every Tweet in the $scope.tweets model -->
+            <div id="tweet-hud" ng-controller="TweetHud">
+                <div ng-repeat="tweet in tweets" class="tweet-item {{tweet.sentiment}}">
+                    <img ng-src="{{tweet.user_profile_image_url}}" />
+                    <span class="text"><a href="{{tweet.user_profile_image_url}}" target="_blank">{{ tweet.user_screen_name}}</a></span>
+                </div>
+            </div>
+        </div>
+        <!-- Leaflet map embed -->
+        <div class="col-sm-9 col-lg-9" id="map"></div>
+    </div>
+    <!-- End Sidebar and Map Row -->
+
+    <!-- Sidebar Toggle -->
+    <a href="#" type="button" rel="tooltip" class="toggle btn btn-default" data-toggle="tooltip" data-placement="right" title="Toggle sidebar"><i class="icon-chevron-left"></i></a>
+
+    <!-- About modal pop-up -->
+    <div class="modal fade" id="aboutModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h3 class="modal-title">BirdsEye by <a href="https://www.jaredmichaelsmith.com">Jared Smith</a></h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End About modal pop-up -->
+
+    <!-- 3rd Party JavaScript files -->
+    <script src="static/js/vendor/sockjs-0.3.js"></script>
+    <script src="static/js/vendor/stomp.min.js"></script>
+    <script src="static/js/vendor/d3.min.js"></script>
+    <script src="static/js/vendor/boostrap.min.js" charset="utf-8"></script>
+    <script src="static/js/vendor/leaflet.js"></script>
+    <script src="static/js/vendor/leaflet-d3.min.js"></script>
+    <script src="static/js/vendor/leaflet-sidebar.min.js"></script>
+    <script src="static/js/vendor/leaflet-control-credits.js"></script>
+    <script src="static/js/vendor/angular.js"></script>
+    <script src="static/js/vendor/angular-resource.js"></script>
+    <script src="static/js/vendor/angular-route.js"></script>
+    <script src="static/js/main.js"></script>
+
+</body>
+</html>
