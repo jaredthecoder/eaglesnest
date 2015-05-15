@@ -4,10 +4,10 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="BirdsEye, a Twitter Sentiment Visualizer. View Twitter like you never have before. From above.">
+    <meta name="description" content="Eagle's Nest, a Twitter Sentiment Visualizer. View Twitter like you never have before. From above.">
     <meta name="author" content="Jared Smith">
 
-    <title>BirdsEye</title>
+    <title>Eagle's Nest</title>
 
     <!-- CSS Files -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
@@ -35,7 +35,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">BirdsEye: Twitter from Above</a>
+            <a class="navbar-brand" href="#">Eagle's Nest</a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
@@ -50,24 +50,26 @@
 
     <!-- Sidebar and Map Container -->
     <div id="container" class="row">
-        <div id="sidebar" class="col-sm-3 col-lg-3" style="padding: 10px; overflow: auto">
+        <div id="sidebar" class="col-sm-2 col-lg-2" style="overflow: hidden">
             <!-- Repeats for every Tweet in the $scope.tweets model -->
             <div id="tweet-hud" ng-controller="TweetHud">
                 {% raw %}
-                <div ng-repeat="tweet in tweets" class="tweet-item {{tweet.sentiment}}">
-                    <img ng-src="{{tweet.user_profile_image_url}}" />
-                    <span class="text"><a href="{{tweet.user_profile_image_url}}" target="_blank">{{ tweet.user_screen_name}}</a></span>
+                <div ng-repeat="tweet in tweets" class="tweet-item">
+                    <div class="twitter-user {{tweet.sentiment}}">
+                        <img ng-src="{{tweet.user_profile_image_url}}" />
+                        <a href="https://twitter.com/statuses/{{tweet.id_str}}" target="_blank">{{ tweet.user_screen_name}}</a>
+                    </div>
                 </div>
                 {% endraw %}
             </div>
         </div>
         <!-- Leaflet map embed -->
-        <div class="col-sm-9 col-lg-9" id="map"></div>
+        <div class="col-sm-10 col-lg-10" id="map"></div>
     </div>
     <!-- End Sidebar and Map Row -->
 
     <!-- Sidebar Toggle -->
-    <a href="#" type="button" rel="tooltip" class="toggle btn btn-default" data-toggle="tooltip" data-placement="right" title="Toggle sidebar"><i class="fa fa-chevron"></i></a>
+    <a href="#" type="button" rel="tooltip" class="toggle btn btn-default" data-toggle="tooltip" data-placement="right" title="Toggle sidebar"><i class="fa fa-users"></i></a>
 
     <!-- About modal pop-up -->
     <div class="modal fade" id="aboutModal">
@@ -75,7 +77,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h3 class="modal-title">BirdsEye by <a href="https://www.jaredmichaelsmith.com">Jared Smith</a></h3>
+                    <h3 class="modal-title">Eagle's Nest by <a href="https://www.jaredmichaelsmith.com">Jared Smith</a></h3>
                 </div>
             </div>
         </div>
@@ -86,7 +88,8 @@
     <script src="static/js/vendor/sockjs-0.3.js"></script>
     <script src="static/js/vendor/stomp.min.js"></script>
     <script src="static/js/vendor/d3.min.js"></script>
-    <script src="static/js/vendor/boostrap.min.js" charset="utf-8"></script>
+    <script src="static/js/vendor/jquery.min.js"></script>
+    <script src="static/js/vendor/bootstrap.min.js" charset="utf-8"></script>
     <script src="static/js/vendor/leaflet.js"></script>
     <script src="static/js/vendor/leaflet-d3.min.js"></script>
     <script src="static/js/vendor/angular.js"></script>

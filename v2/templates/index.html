@@ -4,19 +4,23 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="description" content="BirdsEye, a Twitter Sentiment Visualizer. View Twitter like you never have before. From above.">
+    <meta name="description" content="Eagle's Nest, a Twitter Sentiment Visualizer. View Twitter like you never have before. From above.">
     <meta name="author" content="Jared Smith">
 
-    <title>BirdsEye</title>
+    <title>Eagle's Nest</title>
 
     <!-- CSS Files -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="static/css/vendor/leaflet.css">
     <link rel="stylesheet" href="static/css/vendor/leaflet-control-credits.css">
     <link rel="stylesheet" href="static/css/vendor/leaflet-sidebar.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.1.1/gh-fork-ribbon.min.css" />
     <link rel="stylesheet" href="static/css/main.css">
 
-    <!-- Fix for older browsers (IE) -->
+    <!-- Fixes for older browsers (IE) -->
+    <!--[if lt IE 9]>
+      <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.1.1/gh-fork-ribbon.ie.min.css" />
+    <![endif]-->
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -27,7 +31,12 @@
 
 </head>
 <body>
-    
+   <div class="github-fork-ribbon-wrapper right">
+        <div class="github-fork-ribbon">
+            <a href="https://github.com/jaredmichaelsmith/eaglesnest">Fork me on GitHub</a>
+        </div>
+    </div> 
+
     <!-- Sidebar  -->
     <div id="sidebar" class="sidebar collapsed">
         <!-- Navigation tabs -->
@@ -35,20 +44,21 @@
             <li><a href="#users" role="tab"><i class="fa fa-users"></i></a></li>
             <li><a href="#analytics" role="tab"><i class="fa fa-area-chart"></i></a></li>
             <li><a href="#about" role="tab"><i class="fa fa-cog"></i></a></li>
-            <li><a href="https://github.com/jaredmichaelsmith/birdseye"><i class="fa fa-github"></i></a></li>
             <li><a href="https://twitter.com/share"><i class="fa fa-twitter"></i></a></li>
         </ul>
 
         <!-- Tab panes -->
-        <div class="sidebar-content active">
+        <div class="sidebar-content active" style="overflow: hidden;">
             <div class="sidebar-pane" id="users">
                 <div id="tweet-hud" ng-controller="TweetHud">
-                    <h1>Users</h1>
+                    <h1>Spotted</h1>
                     <!-- Repeats for every Tweet in the $scope.tweets model -->
                     {% raw %}
-                    <div ng-repeat="tweet in tweets" class="tweet-item {{tweet.sentiment}}">
-                        <img ng-src="{{tweet.user_profile_image_url}}" />
-                        <span class="text"><a href="{{tweet.user_profile_image_url}}" target="_blank">{{ tweet.user_screen_name}}</a></span>
+                    <div ng-repeat="tweet in tweets" class="tweet-item">
+                        <div class="twitter-user {{tweet.sentiment}}">
+                            <img ng-src="{{tweet.user_profile_image_url}}">
+                            <a href="https://twitter.com/statuses/{{tweet.id_str}}" target="_blank">{{ tweet.user_screen_name }}</a>
+                        </div>
                     </div>
                     {% endraw %}
                 </div>
@@ -60,10 +70,6 @@
 
     <div id="map" class="sidebar-map"></div>
 
-    <!--
-    <a href="https://github.com/jaredmichaelsmith/birdseye"><img style="position: fixed; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
-    -->
-
     <!-- JavaScript files -->
     <script src="static/js/vendor/sockjs-0.3.js"></script>
     <script src="static/js/vendor/stomp.min.js"></script>
@@ -72,8 +78,7 @@
     <script src="static/js/vendor/leaflet-d3.min.js"></script>
     <script src="static/js/vendor/leaflet-sidebar.min.js"></script>
     <script src="static/js/vendor/leaflet-control-credits.js"></script>
-
-
+    <script src="static/js/vendor/angular.js"></script>
     <script src="static/js/vendor/angular-resource.js"></script>
     <script src="static/js/vendor/angular-route.js"></script>
     <script src="static/js/main.js"></script>

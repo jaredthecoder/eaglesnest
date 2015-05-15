@@ -17,17 +17,12 @@ app.controller('TweetHud', function($scope, $resource, $timeout, $rootScope) {
             $('[rel=tooltip]').tooltip();
             if (document.body.clientWidth <= 767) {
                 $('#sidebar').toggle();
-                $('a.toggle i').toggleClass('icon-chevron-left icon-chevron-right');
             }
-        });
-
-        $(window).resize(function() {
-            $('.tt-dropdown-menu').css('max-height', $('#container').height()-$('.navbar').height()-20);
         });
 
         $('a.toggle').click(function() {
             $('a.toggle i').toggleClass('icon-chevron-left icon-chevron-right');
-            $('#map').toggleClass('col-sm-9 col-lg-9 col-sm-12 col-lg-12');
+            $('#map').toggleClass('col-sm-10 col-lg-10 col-sm-12 col-lg-12');
             $('#sidebar').toggle();
             map.invalidateSize();
             return false;

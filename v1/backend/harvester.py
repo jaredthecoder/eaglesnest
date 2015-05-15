@@ -71,8 +71,6 @@ class CustomStreamListener(tweepy.StreamListener):
             data['user_profile_image_url'] = status.user.profile_image_url
             data['user_screen_name'] = status.user.screen_name
 
-            print data
-
             # Push the tweet onto the AMPQ RabbitMQ channel
             self.channel.basic_publish(exchange='',
                                         routing_key='twitter_sentiment_feed',

@@ -31,12 +31,6 @@ app.controller('TweetHud', function($scope, $resource, $timeout, $rootScope) {
             zoom:5
         });
 
-        L.controlCredits({
-            image: "static/img/birdseye.png",
-            link: "https://jaredmichaelsmith.com",
-            text: "View Twitter like never before. From Above."
-        }).addTo(map);
-
         // Configure a ping layer.
         var options = {
             lng: function(d){ return d[0]; },
