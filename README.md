@@ -1,7 +1,7 @@
 Eagle's Nest
 ============
 
-Author: Jared Smith
+Author: Jared Smith<br>
 Contact: smith@utk.edu
 
 ###Demo:
