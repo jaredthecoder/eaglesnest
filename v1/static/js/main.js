@@ -20,6 +20,13 @@ app.controller('TweetHud', function($scope, $resource, $timeout, $rootScope) {
             }
         });
 
+        $(document).ready(function sendKeywords(keyword) {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.open("POST", "/keywords");
+            xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            xmlhttp.send(JSON.stringify({keyword: document.getElementById(keyword).value}));
+        }
+
         $('a.toggle').click(function() {
             $('a.toggle i').toggleClass('icon-chevron-left icon-chevron-right');
             $('#map').toggleClass('col-sm-10 col-lg-10 col-sm-12 col-lg-12');

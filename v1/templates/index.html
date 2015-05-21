@@ -45,13 +45,9 @@
                 <li><a href="https://twitter.com/share"><i class="fa fa-twitter" style="color: white"></i>&nbsp;&nbsp;Share</a></li>
                 <li><a href="https://twitter.com/share"><i class="fa fa-twitter" style="color: white"></i>&nbsp;&nbsp;Share</a></li>
                 <li>
-                {% from "_formhelpers.html" import render_field %}
-                <form method=post action="/filter">
-                    <dl>
-                        {{ render_field(form.keywords) }}
-                    </dl>
-                    <p><input type=submit value=Filter>
-                </form></li>
+                    <input type="text" id="keyword" value="keyword1">
+                    <input type=button onclick="sendKeywords('keyword')">
+                </li>
             </ul>
         </div>
     </div>
