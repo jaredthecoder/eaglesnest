@@ -21,6 +21,7 @@ from wtforms.validators import Regexp, Required
 
 app = Flask(__name__, static_path='/static')
 CsrfProtect(app)
+kw_form = None
 
 
 class BasicKeywordField(Field):
@@ -68,12 +69,12 @@ class KeywordForm(Form):
 
 @app.route('/')
 def main_view():
-    return render_template('index.html', form=ff)
+    kw_form = KeywordForm()
+    return render_template('index.html', form=kw_form)
 
 
 @app.route('filter', methods=['POST'])
 def filter():
-    kw_form = KeywordForm()
     if request.method == 'POST' and kw_form.validate():
         subprocess.Popen(['/usr/bin/python2.7', 'backend/run_harvester.py'] +
                          kw_form.keywords.data)

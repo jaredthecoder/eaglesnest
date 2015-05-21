@@ -43,6 +43,15 @@
                 <li><a href="mailto:smith@utk.edu?subject=Hello I saw BirdsEye!"><i class="fa fa-envelope" style="color: white"></i>&nbsp;&nbsp;Contact</a></li>
                 <li><a href="https://github.com/jaredmichaelsmith/sentimentvizualizer"><i class="fa fa-github" style="color: white"></i>&nbsp;&nbsp;GitHub</a></li>
                 <li><a href="https://twitter.com/share"><i class="fa fa-twitter" style="color: white"></i>&nbsp;&nbsp;Share</a></li>
+                <li><a href="https://twitter.com/share"><i class="fa fa-twitter" style="color: white"></i>&nbsp;&nbsp;Share</a></li>
+                <li>
+                {% from "_formhelpers.html" import render_field %}
+                <form method=post action="/filter">
+                    <dl>
+                        {{ render_field(form.keywords) }}
+                    </dl>
+                    <p><input type=submit value=Filter>
+                </form></li>
             </ul>
         </div>
     </div>
