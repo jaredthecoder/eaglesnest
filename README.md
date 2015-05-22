@@ -6,8 +6,7 @@ Contact: smith@utk.edu
 
 ###Demo:
 ---
-Check out https://jaredmichaelsmith.com/eaglesnest for a demo.
-
+I will have a demo up soon! Be patient!
 
 ###Overview:
 ---
