@@ -13,13 +13,20 @@ import subprocess
 
 # 3rd Party Assets
 from flask import Flask
-from flask import render_template
+from flask import render_template, url_for
 
 app = Flask(__name__)
+isStarted = False
 
 
 @app.route('/')
 def viz():
+    global isStarted
+
+    if not isStarted:
+        subprocess.Popen(['/usr/bin/python2.7', 'backend/run_harvester.py'])
+        isStarted = True
+
     return render_template('index.html')
 
 
@@ -37,7 +44,4 @@ if __name__ == '__main__':
         print "usage: python app.py <debug[d/n]>"
         sys.exit(1)
 
-    subprocess.Popen(['/usr/bin/python2.7', 'backend/run_harvester.py'])
-
     app.run()
-
