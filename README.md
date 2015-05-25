@@ -6,7 +6,7 @@ Contact: smith@utk.edu
 
 ###Demo:
 ---
-jaredmichaelsmith.com:5000/eaglesnest
+http://jaredmichaelsmith.com:5000/eaglesnest
 
 ###Overview:
 ---
