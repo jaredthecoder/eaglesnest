@@ -4,10 +4,6 @@ Eagle's Nest
 Author: Jared Smith<br>
 Contact: smith@utk.edu
 
-###Demo:
----
-http://jaredmichaelsmith.com:5000/eaglesnest
-
 ###Overview:
 ---
 Eagle's Nest was my experiment to learn the in's and out's of JavaScript, AngularJS, HTML, CSS, and hone my web development skills.
