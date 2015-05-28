@@ -3,4 +3,5 @@ bower_components/
 credentials.py
 *.pyc
 .ropeproject/
+*venv/
 
